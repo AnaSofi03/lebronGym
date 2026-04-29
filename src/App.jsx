@@ -3,13 +3,20 @@ import "./App.css";
 
 // Importa el componente Login
 import Login from "./components/Login";
-
+import AdminDashboard from "./components/AdminDashboard";
+import RecepcionDashboard from "./components/RecepcionDashboard";
+import { Route, Routes } from "react-router-dom";
 // Componente principal de la aplicación
 function App() {
 
   // Renderiza directamente el componente Login
   return (
-    <Login />
+<Routes>
+<Route path="/" element={<Login />} />
+<Route path="/admin/admingym" element={<AdminDashboard />} />
+<Route path="/recepcion" element={<RecepcionDashboard />} />
+</Routes>
+ 
   );
 }
 
