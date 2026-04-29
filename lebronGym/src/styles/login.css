@@ -1,0 +1,70 @@
+/* CONTENEDOR PRINCIPAL */
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+/* IMAGEN DE FONDO */
+.background-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CAPA OSCURA + BLUR */
+.overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* CONTENEDOR DEL LOGIN */
+.login-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login{
+    width: 10px;
+    height: 10px;
+}
+/* CAJA DEL LOGIN */
+.login-box {
+  background:#242424;
+
+  padding: 30px;
+  height: 350px;
+  width: 300px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* INPUTS */
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* BOTÓN */
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: #1E3A8A; /* azul */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* HOVER BOTÓN */
+.login-box button:hover {
+  background: #F97316; /* naranja */
+}
+
