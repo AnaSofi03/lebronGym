@@ -6,12 +6,12 @@ const db = require('../db'); //importa la conexion a la base de datos
  //EndPoint de login
 
  router.post("/login", async (req, res) => { //define la ruta para el login, recibe los datos del usuario y contraseña por el body de la peticion
-    const { nombre, password } = req.body; //extrae el nombre y la contraseña del body de la peticion, osea extraigo los datos enviados desde react
+    const { usuario, password } = req.body; //extrae el nombre y la contraseña del body de la peticion, osea extraigo los datos enviados desde react
  
 
  try{ //busca usuario en la base de datos
-    const [rows] = await db.query("SELECT * FROM usuarios WHERE nombre = ? AND password = ?",
-        [nombre, password]
+    const [rows] = await db.query("SELECT * FROM usuarios WHERE usuario = ? AND password = ?",
+        [usuario, password]
     );
 
     if (rows.length > 0) { // si encontro al menos un usuario correcto
@@ -19,7 +19,7 @@ const db = require('../db'); //importa la conexion a la base de datos
 
         res.json({
             id: user.id,
-            nombre: user.nombre,
+            usuario: user.usuario,
             rol: user.rol
         }); //devuelve los datos al frontend
 
