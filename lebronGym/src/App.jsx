@@ -1,6 +1,6 @@
 // Importa los estilos principales de App
 import "./App.css";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 // Importa el componente Login
 import Login from "./components/Login";
 import AdminDashboard from "./components/AdminDashboard";
@@ -13,8 +13,26 @@ function App() {
   return (
 <Routes>
 <Route path="/" element={<Login />} />
-<Route path="/admin/admingym" element={<AdminDashboard />} />
-<Route path="/recepcion/recepciongym" element={<RecepcionDashboard />} />
+
+<Route 
+  path="/admin/admingym"
+  element ={
+  <ProtectedRoute role="admin">
+  <AdminDashboard />
+  </ProtectedRoute>
+
+  }
+/>
+
+<Route path="/recepcion/recepciongym"
+ element={
+ <ProtectedRoute role="recepcion">
+ <RecepcionDashboard />
+ </ProtectedRoute>
+} />
+
+
+
 </Routes>
  
   );

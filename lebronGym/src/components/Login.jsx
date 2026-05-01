@@ -3,6 +3,7 @@ import React, { useState } from "react"; // Importa React y useState para maneja
 import axios from "axios"; // Importa Axios para hacer peticiones HTTP al backend
 import useStore from "../store/useStore"; // Importa Zustand para manejar el usuario globalmente
 import { useNavigate } from "react-router-dom"; // Hook para redirigir entre páginas
+
 import logo from '../assets/Lebrongym.png'; // Importa el logo de LebronGym
 // Componente principal Login
 export default function Login() {
@@ -16,12 +17,18 @@ export default function Login() {
   // Obtiene la función setUser desde Zustand para guardar usuario logueado
   const setUser = useStore((state) => state.setUser);
   // Función que se ejecuta al enviar el formulario
+
+
+React.useEffect(()=>{     //limpia el usuario guardado al volver al login
+      localStorage.removeItem("user");
+      setUser(null);
+    },[]);
+
+
   const handleLogin = async (e) => {
-    // Evita que el formulario recargue la página
-    e.preventDefault();
+    e.preventDefault(); // Evita que el formulario recargue la página
     // Verifica que usuario y contraseña no estén vacíos
     if (!usuario || !password) {
-
       // Muestra mensaje de error
       alert("Por favor ingresa tu usuario y contraseña");
       // Detiene ejecución
@@ -45,10 +52,10 @@ export default function Login() {
         console.log("Usuario logueado:", user);
         // Si el rol es admin redirige al panel admin
         if (user.rol === "admin") {
-          navigate("/admin/admingym");
+          navigate("/admin/admingym", {replace: true});
         } else {
           // Si no es admin redirige a administrador/cliente
-          navigate("/recepcion/recepciongym");
+          navigate("/recepcion/recepciongym", {replace: true});
         }
       }
     } catch (error) {
@@ -62,6 +69,10 @@ export default function Login() {
       // Muestra error detallado en consola
       console.error("Error login:", error);
     }
+
+
+
+    
   };
   // Renderiza la interfaz visual
   return (

@@ -3,7 +3,7 @@ import React from 'react';
    return (
      <div className="p-4">
        <h1 className="text-2xl font-bold mb-4">Panel de Administración</h1>
-       <p>Sebastian piojoso</p>
+       <p>Bienvenido, administrador</p>
      </div>
    );
  }
