@@ -1,41 +1,33 @@
-const express = require("express"); // Importa Express para crear el servidor backend
-const cors = require("cors"); // Importa CORS para permitir conexión con el frontend
+import express from "express";
+import cors from "cors";
 
-const app = express(); // Crea la aplicación Express
+import usuariosRoutes from "./routes/usuarios.js";
+import authRoutes from "./routes/auth.js";
+import sociosRoutes from "./routes/socios.routes.js";
 
-// Define el puerto del servidor (usa variable de entorno o 3001 por defecto)
-const PORT = process.env.PORT || 3001;
+const app = express();
 
-// =========================
-// Middlewares
-// =========================
+const PORT = process.env.PORT || 4000;
 
-// Permite solicitudes desde otros dominios (ej: React frontend)
 app.use(cors());
 
-// Permite recibir y procesar datos JSON en req.body
 app.use(express.json());
 
-// =========================
-// Rutas
-// =========================
+app.use("/usuarios", usuariosRoutes);
 
-// Conecta la ruta /usuarios con el archivo routes/usuarios.js
-app.use("/usuarios", require("./routes/usuarios"));
-app.use("/auth", require("./routes/auth")); // Ruta para autenticación (login)
-// Ruta principal para probar servidor
-app.get("/", (req, res) => {
-  res.send("Backend funcionando correctamente");
+app.use("/auth", authRoutes);
+
+app.use("/api/socios", sociosRoutes);
+
+app.get("/", (req,res)=>{
+    res.send("Backend funcionando");
 });
 
-// =========================
-// Iniciar servidor
-// =========================
+const server = app.listen(PORT, ()=>{
 
-const server = app.listen(PORT, () => {
-
-  // Muestra mensaje cuando el servidor inicia correctamente
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(
+        `Servidor corriendo en http://localhost:${PORT}`
+    );
 
 });
 
