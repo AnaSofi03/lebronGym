@@ -69,7 +69,7 @@ export const actualizarSocio = async (req,res)=>{
         email,
         fecha_nacimiento,
         estado
-    }=res.body;
+    }=req.body;
 
   await conexion.query(
         `UPDATE socios
