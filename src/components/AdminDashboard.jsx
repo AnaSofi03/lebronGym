@@ -112,9 +112,18 @@ console.log(socios);
      }
 
 
+/*función tarjetas socios contar */
 
-  
-    
+
+const socioActivos = socios.filter(
+  socio => socio.estado === "activo").length;
+/*función tarjetas socios contar inactivos */
+ const socioInactivos = socios.filter(
+  socio => socio.estado === "inactivo").length;
+ 
+
+
+
 
   return (
     <div className="min-h-screen bg-zinc-100">
@@ -161,8 +170,16 @@ console.log(socios);
 
             <div className="bg-white rounded-xl shadow p-6">
               <h3 className="text-zinc-500">Socios Activos</h3>
-              <p className="text-4xl font-bold">120</p>
+              <p className="text-4xl font-bold">{socioActivos}</p>
             </div>
+
+          
+            <div className="bg-white rounded-xl shadow p-6">
+              <h3 className="text-zinc-500">Socios Inactivos</h3>
+              <p className="text-4xl font-bold">{socioInactivos}</p>
+            </div>
+
+            
 
             <div className="bg-white rounded-xl shadow p-6">
               <h3 className="text-zinc-500">Ingresos</h3>
