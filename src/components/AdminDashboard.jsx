@@ -26,17 +26,28 @@ export default function AdminDashboard() {
     e.preventDefault();
 
     try{
-      await axios.post(
-        "http://localhost:4000/api/socios",
+    
+      if (nuevoSocio.id) {
+
+      await axios.put(
+        `http://localhost:4000/api/socios/${nuevoSocio.id}`,
         nuevoSocio
       );
 
 
       alert("Socio agregado correctamente");
 
+    }else{
+      await axios.post(
+        "http://localhost:4000/api/socios",
+        nuevoSocio
+      )
+
+      alert("Socio agregado correctamente");
+    }
+
       cargarSocios();
       setMostrarModal(false);
-
 
       setNuevoSocio({
         dni: "",
@@ -73,10 +84,39 @@ useEffect(() =>{
 
 
 console.log(socios);
+
+
+ /*Funcion para eliminar socio */
+   const eliminarSocio = async (id) =>{
+      const confirmar = window.confirm("Eliminar este socio?");
+
+    if(!confirmar) return;
+
+    try{
+      await axios.delete(
+        `http://localhost:4000/api/socios/${id}`
+      );
+            cargarSocios();
+    } catch(error){
+      console.log(error);
+    }
+   };
+
+
+   /* Función para editar socios */
+
+   const editarSocio = (socio) =>{
+    console.log("Socio:", socio);
+    setNuevoSocio(socio);
+    setMostrarModal(true);
+     }
+
+
+
+  
+    
+
   return (
-
-
-
     <div className="min-h-screen bg-zinc-100">
 
       {/* Navbar */}
@@ -169,6 +209,7 @@ console.log(socios);
                   <th className="text-left p-2">Fecha de Nacimiento</th>
                   <th className="text-left p-2">Fecha de Registro</th>
                   <th className="text-left p-2">Estado</th>
+                  <th className="text-left p-2">Acciones</th>
                 </tr>
               </thead>
 
@@ -186,6 +227,11 @@ console.log(socios);
                 
                 <td className="p-2">{socio.estado}</td>
 
+                <td>
+                  <button onClick={() => editarSocio(socio)}>✏️</button>
+
+                  <button onClick={() => eliminarSocio(socio.id)}>🗑️</button>
+                </td>
 
 
 

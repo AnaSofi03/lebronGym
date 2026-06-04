@@ -95,6 +95,6 @@ export const actualizarSocio = async (req,res)=>{
     );
 
     res.json({
-        mensaje:"Actualizado"
+        mensaje:" Socio actualizado correctamente"
     });
 };
