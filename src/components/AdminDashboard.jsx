@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { obtenerSocios } from "../services/sociosApi";
 export default function AdminDashboard() {
   
   
@@ -122,8 +123,16 @@ const socioActivos = socios.filter(
   socio => socio.estado === "inactivo").length;
  
 
+/*funcion cambiar esstado */
 
+const cambiarEstado = async (id, nuevoEstado) => {
+  await axios.put(
+    `http://localhost:4000/api/socios/${id}/estado`,
+    { estado: nuevoEstado }
+  );
 
+  cargarSocios();
+};
 
   return (
     <div className="min-h-screen bg-zinc-100">
@@ -227,6 +236,7 @@ const socioActivos = socios.filter(
                   <th className="text-left p-2">Fecha de Registro</th>
                   <th className="text-left p-2">Estado</th>
                   <th className="text-left p-2">Acciones</th>
+                 
                 </tr>
               </thead>
 
@@ -238,21 +248,61 @@ const socioActivos = socios.filter(
                 <td className="p-2">{socio.apellido}</td>
                 <td className="p-2">{socio.telefono}</td>
                 <td className="p-2">{socio.email}</td>
+                <td> {new Date(socio.fecha_nacimiento).toLocaleDateString("es-AR")}</td>
+                <td>{new Date(socio.fecha_registro).toLocaleString("es-AR")}</td>
+                <td className="p-2">
+  {socio.estado === "activo" ? (
+    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+      Activo
+    </span>
+  ) : (
+    <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+      Inactivo
+    </span>
+  )}
+</td>
 
-                <td className="p-2">{socio.fecha_nacimiento}</td>
-                <td className="p-2">{socio.fecha_registro}</td>
+<td>
+  <div className="flex items-center gap-2">
+    <button
+      onClick={() => editarSocio(socio)}
+      className="bg-blue-500 text-white px-2 py-1 rounded"
+      title="Editar"
+    >
+      ✏️
+    </button>
+
+    <button
+      onClick={() => eliminarSocio(socio.id)}
+      className="bg-gray-500 text-white px-2 py-1 rounded"
+      title="Eliminar"
+    >
+      🗑️
+    </button>
+
+    {socio.estado === "activo" ? (
+      <button
+        onClick={() => cambiarEstado(socio.id, "inactivo")}
+        className="bg-red-500 text-white px-3 py-1 rounded"
+      >
+        Desactivar
+      </button>
+    ) : (
+      <button
+        onClick={() => cambiarEstado(socio.id, "activo")}
+        className="bg-green-500 text-white px-3 py-1 rounded"
+      >
+        Activar
+      </button>
+    )}
+  </div>
+</td>
                 
-                <td className="p-2">{socio.estado}</td>
-
-                <td>
-                  <button onClick={() => editarSocio(socio)}>✏️</button>
-
-                  <button onClick={() => eliminarSocio(socio.id)}>🗑️</button>
-                </td>
+            
+              </tr>
 
 
 
-                  </tr>
                 ))}
               </tbody>
             </table>

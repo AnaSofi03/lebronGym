@@ -98,3 +98,20 @@ export const actualizarSocio = async (req,res)=>{
         mensaje:" Socio actualizado correctamente"
     });
 };
+
+//cambiar estadod del socio
+
+
+export const cambiarEstado = async (req, res) => {
+  console.log("ENTRO A CAMBIAR ESTADO");
+
+  const { id } = req.params;
+  const { estado } = req.body;
+
+  await conexion.query(
+    "UPDATE socios SET estado = ? WHERE id = ?",
+    [estado, id]
+  );
+
+  res.json({ mensaje: "Estado actualizado" });
+};

@@ -6,6 +6,12 @@ import authRoutes from "./routes/auth.js";
 import sociosRoutes from "./routes/socios.routes.js";
 
 const app = express();
+app.use(express.json());
+
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
 
 const PORT = process.env.PORT || 4000;
 
@@ -21,6 +27,9 @@ app.use("/api/socios", sociosRoutes);
 
 app.get("/", (req,res)=>{
     res.send("Backend funcionando");
+
+
+
 });
 
 const server = app.listen(PORT, ()=>{
