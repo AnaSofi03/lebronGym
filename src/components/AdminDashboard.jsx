@@ -10,6 +10,11 @@ export default function AdminDashboard() {
   const[mostrarModal, setMostrarModal] = useState(false);
 
 
+
+  /*crear estado para buscador */
+ const [busqueda, setBusqueda] = useState("");
+
+
   /*crear estados para socios*/
   const[nuevoSocio, setNuevoSocio] = useState({
     dni: "",
@@ -134,6 +139,21 @@ const cambiarEstado = async (id, nuevoEstado) => {
   cargarSocios();
 };
 
+/*fitrar los socios */
+
+const sociosFiltrados = socios.filter((socio) =>
+  socio.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+  socio.apellido.toLowerCase().includes(busqueda.toLowerCase()) ||
+  socio.dni.toString().includes(busqueda)
+);
+
+
+
+
+
+
+
+
   return (
     <div className="min-h-screen bg-zinc-100">
 
@@ -202,8 +222,27 @@ const cambiarEstado = async (id, nuevoEstado) => {
 
           </div>
 
-      <div className="flex justify-between items-center mt-8 mb-4">
+<h2 className=" mt-8 text-xl font-bold">
+    Buscar Socios
+  </h2>
+  {/*  */}
+<div className="mt-8">
+  <input type="text"
+  placeholder="Buscar por nombre, apellido o DNI"
+  value={busqueda}
+  onChange={(e) => setBusqueda(e.target.value)}
+  className="w-full p-3 border rounded-lg shadow-sm focus:outline-none  focus:ring-2 focus:ring-orange-500"
+  />
+</div>
 
+ {busqueda && (
+    <p className="mt-2 text-sm text-gray-600">
+      Resultados encontrados: {sociosFiltrados.length}
+    </p>
+  )}
+
+
+      <div className="flex justify-between items-center mt-8 mb-4">
   <h2 className="text-xl font-bold">
     Últimos Socios Registrados
   </h2>
@@ -241,7 +280,7 @@ const cambiarEstado = async (id, nuevoEstado) => {
               </thead>
 
               <tbody>
-                {socios.map((socio) =>(
+                {sociosFiltrados.map((socio) =>(
                   <tr key={socio.id} className="border-b hover:bg-gray-50">
                 <td className="p-2">{socio.dni}</td>
                 <td className="p-2">{socio.nombre}</td>
