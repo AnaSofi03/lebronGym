@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+/* CONTENEDOR PRINCIPAL */
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+/* IMAGEN DE FONDO */
+.background-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.titulo {
+  position:absolute;
+    margin-top: 26px;
+    margin-left: 125px;
+    font-size: 1.6rem;
+    color: white;
+    z-index: 10;
+    letter-spacing: 2px;
+    font-family: 'Anton', sans-serif;
+}
+
+.logo{
+  position:absolute;
+    margin-top:-15px;
+    margin-left: 15px;
+    width: 121px;
+    height: 121px;
+    z-index: 10;
+  
+
+}
+
+
+/* CAPA OSCURA + BLUR */
+.overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(1px);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* CONTENEDOR DEL LOGIN */
+.login-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login{
+    width: 10px;
+    height: 10px;
+}
+/* CAJA DEL LOGIN */
+.login-box {
+  background:#2c3131;
+
+  padding: 30px;
+  height: 350px;
+  width: 300px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* INPUTS */
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* BOTÓN */
+.login-box button {
+  width: 100%;
+  margin-top: 60px;
+  padding: 10px;
+  background: #f97316; /* azul */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+
+.login-titulo {
+  color: white;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  margin-top:20px;
+  padding: 10px 5px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  outline: none;
+  color: white;
+  font-size: 18px;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
